@@ -3,15 +3,13 @@ FROM centos:centos7.6.1810
 RUN yum update -y && \
     yum install -y epel-release && \
     yum install -y python-pip python-devel && \
-    yum install -y gcc openssl-devel rsync make file autoconf automake libtool && \
+    yum install -y gcc openssl-devel rsync make file autoconf automake libtool sshpass && \
     yum clean all
 
 RUN pip install -U pip setuptools && \
     pip install requests termcolor jmespath jq
 
-RUN pip install ansible==2.6.12 ansible-modules-hashivault docker-py boto boto3
-RUN pip install awscli --upgrade --user
-
+RUN pip install awscli ansible==2.6.12 cryptography==2.4.2 ansible-modules-hashivault docker-py boto boto3
 
 ADD ansible.cfg /etc/ansible/ansible.cfg
 
