@@ -1,6 +1,7 @@
 #!/bin/bash
 
+ansible_version=2.6.18
+
 curl -O https://raw.githubusercontent.com/ansible/ansible/stable-2.6/examples/ansible.cfg
-sed -i -e 's/#retry_files_enabled = False/retry_files_enabled = False/g' ./ansible.cfg
-sed -i -e 's/#host_key_checking = False/host_key_checking = False/g' ./ansible.cfg
-docker build --no-cache -t acherlyonok/ansible:2.6.12 -t acherlyonok/ansible:latest .
+docker build --pull --no-cache -t acherlyonok/ansible:$ansible_version -t acherlyonok/ansible:latest .
+docker push acherlyonok/ansible:$ansible_version && docker push acherlyonok/ansible:latest
