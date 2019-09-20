@@ -2,6 +2,8 @@ FROM centos:centos7
 
 USER root
 
+ARG ANSIBLE_VERSION=2.6.19
+
 RUN yum update -y && \
     yum install -y epel-release && \
     yum install -y python-pip python-devel && \
@@ -15,7 +17,7 @@ RUN mkdir -p /etc/ansible
 RUN echo "[local]" >> /etc/ansible/hosts && \
     echo "localhost" >> /etc/ansible/hosts
 
-RUN pip install awscli ansible==2.6.18 cryptography ansible-modules-hashivault docker-py boto boto3
+RUN pip install awscli ansible==${ANSIBLE_VERSION} cryptography ansible-modules-hashivault docker-py boto boto3
 
 # ADD ansible.cfg /etc/ansible/ansible.cfg
 
